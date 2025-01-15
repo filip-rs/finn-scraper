@@ -132,4 +132,4 @@ Contributions are welcome! If you’d like to improve the system or add features
 ## Acknowledgments
 
 - **OpenAI GPT-3.5**: For its text parsing and decision-making capabilities.
-- **Contributors**: Thank you to me, myself and I.
+- **Contributors**: So far it's only been me, myself and I.
