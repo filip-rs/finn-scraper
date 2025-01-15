@@ -1,4 +1,4 @@
-import requests
+import requests, re
 from bs4 import BeautifulSoup
 
 
@@ -16,8 +16,45 @@ def metadata_fetcher(url):
             # print(f"dicts: {key}: {value}")
             metadata.append(value)
 
+        metadata.append(price_fetcher(url))
+        # print(metadata)
         return str(metadata)
 
+
+
+def price_fetcher(url):
+    # Send a GET request to the URL
+    response = requests.get(url)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Parse the HTML content of the page
+        soup = BeautifulSoup(response.content, "html.parser")
+
+        # Extract the price
+        price = soup.find("div", class_="h2")
+        if not price:
+            price2 = soup.find("p", class_="m-0 h2")
+            if price2:
+                # Extract the text and replace '&nbsp;' if needed
+                price_text = str(price2) #.get_text() # .replace("&nbsp;", "")
+                # print(price_text)
+                price = price_text.replace("\xa0", " ")
+
+        html_string = str(price)
+        cleaned_string = re.sub(r'<.*?>', '', html_string)
+        #cleaned_string = price
+        # print(cleaned_string)
+
+        price = f"\nPrice: {cleaned_string}"
+
+        return price
+
+    else:
+        print("Failed to retrieve the webpage.")
+        return "\nPrice not found"
+
+    
 
 
 
