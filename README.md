@@ -125,7 +125,7 @@ Contributions are welcome! If you’d like to improve the system or add features
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+![MIT License](https://img.shields.io/badge/license-MIT-green)
 
 ---
 
